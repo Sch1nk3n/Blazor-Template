@@ -1,41 +1,30 @@
 name: .NET CI
-
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
-          cache: true                 # NuGet-Caching
-          cache-dependency-path: |
-            **/*.csproj
-            **/packages.lock.json
 
       - name: Restore
-        run: dotnet restore source/repos/Blazor-Template.sln
+        run: dotnet restore
 
       - name: Build (Release)
-        run: dotnet build source/repos/Blazor-Template.sln --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore
 
       - name: Test (mit Coverage)
-        run: dotnet test source/repos/Blazor-Template.sln --configuration Release --no-build --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx"
 
-      # (Optional) Testresultate & Coverage als Artefakte anhängen
-      - name: Collect Testresults
+      - name: Upload Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: |
             **/TestResults/*.trx
-            **/TestResults/*/coverage.cobertura.xml
+            **/TestResults/**/coverage.cobertura.xml
