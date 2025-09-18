@@ -22,13 +22,13 @@ jobs:
             **/packages.lock.json
 
       - name: Restore
-        run: dotnet restore Blazor-Template.sln
+        run: dotnet restore source/repos/Blazor-Template.sln
 
       - name: Build (Release)
-        run: dotnet build Blazor-Template.sln --configuration Release --no-restore
+        run: dotnet build source/repos/Blazor-Template.sln --configuration Release --no-restore
 
       - name: Test (mit Coverage)
-        run: dotnet test Blazor-Template.sln --configuration Release --no-build --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test source/repos/Blazor-Template.sln --configuration Release --no-build --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx"
 
       # (Optional) Testresultate & Coverage als Artefakte anhängen
       - name: Collect Testresults
