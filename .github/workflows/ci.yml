@@ -31,7 +31,7 @@ jobs:
         run: dotnet test Blazor-Template.sln --configuration Release --no-build --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx"
 
       # (Optional) Testresultate & Coverage als Artefakte anhängen
-      - name: Sammle Testresultate
+      - name: Collect Testresults
         if: always()
         uses: actions/upload-artifact@v4
         with:
