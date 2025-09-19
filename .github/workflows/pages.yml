@@ -24,6 +24,7 @@ jobs:
         run: |
           dotnet restore Web/Web.csproj
           dotnet publish Web/Web.csproj -c Release -o build
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
