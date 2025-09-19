@@ -1,0 +1,40 @@
+name: Client Deploy (Pages)
+
+on:
+  push:
+    branches: [ dev, main ]
+    paths:
+      - 'src/Clients/Web/**'
+      - '.github/workflows/pages.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Restore & Publish (Blazor Web-App)
+        run: |
+          dotnet restore src/Clients/Web/Web.csproj
+          dotnet publish src/Clients/Web/Web.csproj -c Release -o build
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/wwwroot
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Choose environment by branch
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
