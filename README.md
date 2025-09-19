@@ -1,6 +1,6 @@
 # Blazor-Template
 This is a template repo for future Blazor Web-Apps.
-
+ 
 ## Stack
 [![.NET](https://img.shields.io/badge/.NET-9.0-blueviolet)](https://dotnet.microsoft.com/) 
 [![Blazor](https://img.shields.io/badge/Blazor-Server%2FWASM-purple)](https://learn.microsoft.com/aspnet/core/blazor)
