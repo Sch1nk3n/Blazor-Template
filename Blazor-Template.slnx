@@ -12,6 +12,10 @@
   <Folder Name="/Server/Infrastructure/">
     <Project Path="Infrastructure/Infrastructure.csproj" Id="937b9bfc-5a26-45dd-a953-4de8257c80b4" />
   </Folder>
+  <Folder Name="/Server/Tests/">
+    <Project Path="Api.Tests/WebAPI.Tests.csproj" Id="fcd6dcd1-5009-40fc-9bf0-1c67e50da8c0" />
+    <Project Path="Application.Tests/Application.Tests.csproj" Id="7c7f8367-d827-438d-a207-d6c453fe53ee" />
+  </Folder>
   <Folder Name="/Shared/">
     <Project Path="Shared/Shared.csproj" Id="42d54d25-6fc8-4136-8a03-eb66bc87af26" />
   </Folder>
