@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   build:
+    name: Build (Client)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,16 +25,15 @@ jobs:
         run: |
           dotnet restore Web/Web.csproj
           dotnet publish Web/Web.csproj -c Release -o build
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/wwwroot
 
   deploy:
+    name: Deploy (Pages)
     needs: build
     runs-on: ubuntu-latest
-    # Choose environment by branch
     environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
     steps:
       - name: Deploy to GitHub Pages
