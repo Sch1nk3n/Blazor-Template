@@ -2,23 +2,29 @@ name: .NET CI
 on: [push, pull_request]
 
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: 9.x
 
-      - name: Restore
+      - name: Restore Dependencies
         run: dotnet restore
 
-      - name: Build (Release)
-        run: dotnet build --configuration Release --no-restore
+      - name: Build Solution
+        run: dotnet build --no-restore --configuration Release
 
-      - name: Test (mit Coverage)
-        run: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx"
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Run Tests
+        run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx" --verbosity normal
 
       - name: Upload Artifacts
         if: always()
