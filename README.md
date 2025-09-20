@@ -8,6 +8,9 @@ This is a template repo for future Blazor Web-Apps.
 [![CI](https://github.com/Sch1nk3n/Blazor-Template/actions/workflows/ci.yml/badge.svg)](https://github.com/Sch1nk3n/Blazor-Template/actions)
 [![xUnit](https://img.shields.io/badge/xUnit-2.6.0-9cf)](https://xunit.net/)
 
+## Status
+[![.NET CI](https://github.com/Sch1nk3n/Blazor-Template/actions/workflows/ci.yml/badge.svg)](https://github.com/Sch1nk3n/Blazor-Template/actions/workflows/ci.yml)
+
 ## Schnellstart
 ```bash
 dotnet restore
